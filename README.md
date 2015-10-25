@@ -34,20 +34,20 @@ $ npm install gulp-mongodb-data --save
 
 ```js
 var gulp = require('gulp');
-var mongodb = require('gulp-mongodb-data')
+var mongodbData = require('gulp-mongodb-data')
 
 // Loads JSON files with arrays of objects into the specified
 // MongoDB server, using file names as collection names
 gulp.task('metadata', function() {
 	gulp.src('./db/metadata/*.json')
-		.pipe(mongodb({ mongoUrl: 'mongodb://localhost/mydb' }));
+		.pipe(mongodbData({ mongoUrl: 'mongodb://localhost/mydb' }));
 });
 
 // Loads JSON files with arrays of objects into the specified
 // MongoDB server, using the specified collection name
 gulp.task('metadata', function() {
 	gulp.src('./db/metadata/users-test.json')
-		.pipe(mongodb({
+		.pipe(mongodbData({
 				mongoUrl: 'mongodb://localhost/mydb',
 				collectionName: 'users'
 		}));
@@ -58,7 +58,7 @@ gulp.task('metadata', function() {
 // dropping the collection before bulk inserting data
 gulp.task('metadata', function() {
 	gulp.src('./db/metadata/users-test.json')
-		.pipe(mongodb({
+		.pipe(mongodbData({
 				mongoUrl: 'mongodb://localhost/mydb',
 				collectionName: 'users',
 				dropCollection: true
