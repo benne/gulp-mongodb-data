@@ -1,0 +1,28 @@
+{
+  "name": "gulp-mongodb-data",
+  "description": "Load JSON files into MongoDB with Gulp (gulpjs.com)",
+  "version": "1.0.0",
+  "homepage": "https://github.com/benne/gulp-mongodb-data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benne/gulp-mongodb-data.git"
+  },
+  "author": "Benne <benne@chaosbyte.com> (http://benne.io/)",
+  "main": "./index.js",
+  "dependencies": {
+    "async": "^1.4.2",
+    "mongodb": "^2.0.46",
+    "plugin-error": "^0.1.2",
+    "through2": "^2.0.0"
+  },
+  "engines": {
+    "node": ">= 4.1.2"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "gulp-mongodb",
+    "mongodb"
+  ],
+  "license": "MIT"
+}
