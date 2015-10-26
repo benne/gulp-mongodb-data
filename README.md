@@ -39,32 +39,31 @@ var mongodbData = require('gulp-mongodb-data')
 // Loads JSON files with arrays of objects into the specified
 // MongoDB server, using file names as collection names
 gulp.task('metadata', function() {
-	gulp.src('./db/metadata/*.json')
-		.pipe(mongodbData({ mongoUrl: 'mongodb://localhost/mydb' }));
+  gulp.src('./db/metadata/*.json')
+    .pipe(mongodbData({ mongoUrl: 'mongodb://localhost/mydb' }));
 });
 
 // Loads JSON files with arrays of objects into the specified
 // MongoDB server, using the specified collection name
 gulp.task('metadata', function() {
-	gulp.src('./db/metadata/users-test.json')
-		.pipe(mongodbData({
-				mongoUrl: 'mongodb://localhost/mydb',
-				collectionName: 'users'
-		}));
+  gulp.src('./db/metadata/users-test.json')
+    .pipe(mongodbData({
+      mongoUrl: 'mongodb://localhost/mydb',
+      collectionName: 'users'
+    }));
 });
 
 // Loads JSON files with arrays of objects into the specified
 // MongoDB server, using the specified collection name, and
 // dropping the collection before bulk inserting data
 gulp.task('metadata', function() {
-	gulp.src('./db/metadata/users-test.json')
-		.pipe(mongodbData({
-				mongoUrl: 'mongodb://localhost/mydb',
-				collectionName: 'users',
-				dropCollection: true
-		}));
+  gulp.src('./db/metadata/users-test.json')
+    .pipe(mongodbData({
+      mongoUrl: 'mongodb://localhost/mydb',
+      collectionName: 'users',
+      dropCollection: true
+    }));
 });
-
 ```
 
 ### JSON files
@@ -74,10 +73,10 @@ to be able to process it.
 
 ```js
 [{
-	"a": 1
+  "a": 1
 },
 {
-	"a": 2
+  "a": 2
 },
 ...]
 ```
