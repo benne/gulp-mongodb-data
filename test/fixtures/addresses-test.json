@@ -1,0 +1,25 @@
+[{
+  "street": "Beacon Street",
+  "houseNo": "112½",
+  "city": "Boston"
+},
+{
+  "street": "Jeopardy Lane",
+  "houseNo": "9764",
+  "city": "Chicago"
+},
+{
+  "street": "Webfoot Walk",
+  "houseNo": "1313",
+  "city": "Duckburg"
+},
+{
+  "street": "Evergreen Terrace",
+  "houseNo": "740",
+  "city": "Springfield"
+},
+{
+  "street": "Spooner Street",
+  "houseNo": "31",
+  "city": "Quahog"
+}]
