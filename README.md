@@ -27,7 +27,7 @@
 ### Install
 
 ```bash
-$ npm install gulp-mongodb-data --save
+$ npm install gulp-mongodb-data --save-dev
 ```
 
 ### Example
