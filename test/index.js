@@ -199,6 +199,8 @@ describe('gulp-mongodb-data', function() {
         users.length.should.eql(5);
         users[2].firstName.should.eql("Han");
         users[4].lastName.should.eql('Nuts');
+        users[1]._id.should.be.Object();
+        users[1]._id.toString().should.eql('578611d17c8a27dd5b329fd5');
         done();
       });
     });

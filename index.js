@@ -3,6 +3,7 @@
 // Requires
 var async = require('async');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb-core').BSON.ObjectID
 var path = require('path');
 var PluginError = require('plugin-error');
 var through = require('through2');
@@ -43,6 +44,13 @@ module.exports = function(opts) {
             showStack: true
           }));
 
+    json = json.map(function (obj) {
+      if(obj._id) {
+        obj._id = ObjectID(obj._id);
+      }
+      return obj;
+    });
+    
     MongoClient.connect(opts.mongoUrl, function(err, db) {
       if (err)
         return cb(
