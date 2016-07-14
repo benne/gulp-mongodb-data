@@ -1,100 +1,103 @@
-'use strict';
+'use strict'
 
 // Requires
-var async = require('async');
-var MongoClient = require('mongodb').MongoClient;
+var async = require('async')
+var MongoClient = require('mongodb').MongoClient
 var ObjectID = require('mongodb-core').BSON.ObjectID
-var path = require('path');
-var PluginError = require('plugin-error');
-var through = require('through2');
+var path = require('path')
+var PluginError = require('plugin-error')
+var through = require('through2')
 
-module.exports = function(opts) {
-  return through.obj(function(file, enc, cb) {
+module.exports = function (opts) {
+  return through.obj(function (file, enc, cb) {
     // File is null - pass along
-    if (file.isNull()) return cb(null, file);
+    if (file.isNull()) return cb(null, file)
 
     // File is stream - not supported
-    if (file.isStream())
+    if (file.isStream()) {
       return cb(
         new PluginError('gulp-mongodb-data', 'Streaming is not supported')
-      );
+      )
+    }
 
     // Set default options
-    opts = setDefaultOptions(opts);
+    opts = setDefaultOptions(opts)
 
-    var content = String(file.contents);
-    var json;
+    var content = String(file.contents)
+    var json
 
     try {
-      json = JSON.parse(content);
+      json = JSON.parse(content)
     } catch (e) {
       return cb(
         new PluginError(
           'gulp-mongodb-data', 'Problem parsing JSON file', {
             fileName: file.path,
             showStack: true
-          }));
+          }))
     }
 
     // Only arrays of objects are supported
-    if (!Array.isArray(json))
+    if (!Array.isArray(json)) {
       return cb(
         new PluginError('gulp-mongodb-data', 'JSON is not an array', {
-            fileName: file.path,
-            showStack: true
-          }));
+          fileName: file.path,
+          showStack: true
+        }))
+    }
 
     json = json.map(function (obj) {
-      if(obj._id) {
-        obj._id = ObjectID(obj._id);
+      if (obj._id) {
+        obj._id = ObjectID(obj._id)
       }
-      return obj;
-    });
-    
-    MongoClient.connect(opts.mongoUrl, function(err, db) {
-      if (err)
-        return cb(
-          new PluginError('gulp-mongodb-data', err, {showStack: true}));
+      return obj
+    })
 
-      var collectionName =  opts.collectionName ||
-        path.basename(file.path, path.extname(file.path));
-      var coll = db.collection(collectionName);
+    MongoClient.connect(opts.mongoUrl, function (err, db) {
+      if (err) {
+        return cb(
+          new PluginError('gulp-mongodb-data', err, {showStack: true}))
+      }
+
+      var collectionName = opts.collectionName ||
+        path.basename(file.path, path.extname(file.path))
+      var coll = db.collection(collectionName)
 
       // Run methods synchronous
       async.series([
         // Drop collection if option is set and collection exists
-        function(cb) {
+        function (cb) {
           if (opts.dropCollection) {
             db.listCollections({name: collectionName})
-              .toArray(function(err, items) {
-                if (err) return cb(err);
-                if (items.length) return coll.drop(cb);
-                cb();
-              });
-          } else
-            cb();
+              .toArray(function (err, items) {
+                if (err) return cb(err)
+                if (items.length) return coll.drop(cb)
+                cb()
+              })
+          } else cb()
         },
         // Insert dato into collection
-        function(cb) {
-          coll.insertMany(json, cb);
+        function (cb) {
+          coll.insertMany(json, cb)
         }
-      ], function(err) {
-        db.close();
+      ], function (err) {
+        db.close()
 
-        if (err)
+        if (err) {
           return cb(
-            new PluginError('gulp-mongodb-data', err, {showStack: true}));
+            new PluginError('gulp-mongodb-data', err, {showStack: true}))
+        }
 
         // Pass on
-        cb(null, file);
-      });
-    });
-  });
-};
+        cb(null, file)
+      })
+    })
+  })
+}
 
-function setDefaultOptions(opts) {
-  opts = opts || {};
-  opts.mongoUrl = opts.mongoUrl || 'mongodb://localhost/nope';
+function setDefaultOptions (opts) {
+  opts = opts || {}
+  opts.mongoUrl = opts.mongoUrl || 'mongodb://localhost/nope'
 
-  return opts;
+  return opts
 }
