@@ -10,7 +10,7 @@
   "author": "Benne <benne@chaosbyte.com> (http://benne.io/)",
   "main": "./index.js",
   "dependencies": {
-    "async": "^1.4.2",
+    "async": "^2.0.0",
     "mongodb": "^2.0.46",
     "mongodb-core": "^2.0.5",
     "plugin-error": "^0.1.2",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "mocha": "^2.3.3",
-    "should": "^7.1.1",
+    "should": "^9.0.2",
     "vinyl": "^1.1.0"
   },
   "scripts": {

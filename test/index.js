@@ -43,8 +43,8 @@ describe('gulp-mongodb-data', function() {
       var adminDb = dbRef.admin();
       adminDb.listDatabases(function(err, result) {
         async.some(result.databases, function(db, cb) {
-          cb(db.name === 'nope');
-        }, function(result) {
+          cb(null, db.name === 'nope');
+        }, function(err, result) {
           result.should.be.true();
           done();
         });
@@ -62,8 +62,8 @@ describe('gulp-mongodb-data', function() {
       var db = dbRef.db('nope');
       db.listCollections().toArray(function(err, collections) {
         async.some(collections, function(coll, cb) {
-          cb(coll.name === 'users-test');
-        }, function(result) {
+          cb(null, coll.name === 'users-test');
+        }, function(err, result) {
           result.should.be.true();
           done();
         });
@@ -106,8 +106,8 @@ describe('gulp-mongodb-data', function() {
       var adminDb = dbRef.admin();
       adminDb.listDatabases(function(err, result) {
         async.some(result.databases, function(db, cb) {
-          cb(db.name === 'nopeV2');
-        }, function(result) {
+          cb(null, db.name === 'nopeV2');
+        }, function(err, result) {
           result.should.be.true();
           done();
         });
@@ -127,8 +127,8 @@ describe('gulp-mongodb-data', function() {
       var db = dbRef.db('nope');
       db.listCollections().toArray(function(err, collections) {
         async.some(collections, function(coll, cb) {
-          cb(coll.name === 'lolcats');
-        }, function(result) {
+          cb(null, coll.name === 'lolcats');
+        }, function(err, result) {
           result.should.be.true();
           done();
         });
@@ -175,8 +175,8 @@ describe('gulp-mongodb-data', function() {
       var db = dbRef.db('nope');
       db.listCollections().toArray(function(err, collections) {
         async.filter(collections, function(coll, cb) {
-          cb(['users-test', 'addresses-test'].indexOf(coll.name) >= 0);
-        }, function(result) {
+          cb(null, ['users-test', 'addresses-test'].indexOf(coll.name) >= 0);
+        }, function(err, result) {
           result.length.should.eql(2);
           done();
         });
