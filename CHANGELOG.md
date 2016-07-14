@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+**July 14, 2016**
+
+* **Add** Add possibility to use _id in files to import (thanks to [denneulin](https://github.com/denneulin))
+* **Fix** Fix problem with tests not cleaning up
+
 ## 1.0.2
 **October 27, 2015**
 
