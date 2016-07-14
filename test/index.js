@@ -221,6 +221,31 @@ describe('gulp-mongodb-data', function () {
     stream.write(fixture('test/fixtures/users-test.json'))
     stream.end()
   })
+
+  it('should put objects from mongoexport file into collection', function (done) {
+    var stream = mongodbData()
+
+    stream.on('data', function () {
+      var db = dbRef.db('nope')
+      var coll = db.collection('export-test')
+
+      coll.find().toArray(function (err, objs) {
+        if (err) throw err
+        objs.length.should.eql(3)
+        objs[0].first.should.eql('Brian')
+        objs[1].last.should.eql('Coughlin')
+        objs[2].birthdate.should.eql(new Date('1963-10-06T00:00:00.000Z'))
+        objs[1].male.should.be.true()
+        objs[2].appearance.should.eql(3)
+        objs[1]._id.should.be.Object()
+        objs[1]._id.toString().should.eql('5787d450596cca272cab90bb')
+        done()
+      })
+    })
+
+    stream.write(fixture('test/fixtures/export-test.json'))
+    stream.end()
+  })
 })
 
 function fixture (path) {

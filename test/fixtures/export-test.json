@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5787d450596cca272cab90ba"},"first":"Brian","last":"Flanagan","birthdate":{"$date":"1962-07-03T00:00:00.000Z"},"appearance":1,"male":true}
+{"_id":{"$oid":"5787d450596cca272cab90bb"},"first":"Doug","last":"Coughlin","birthdate":{"$date":"1947-06-23T00:00:00.000Z"},"appearance":2,"male":true}
+{"_id":{"$oid":"5787d450596cca272cab90bc"},"first":"Jordan","last":"Mooney","birthdate":{"$date":"1963-10-06T00:00:00.000Z"},"appearance":3,"male":false}

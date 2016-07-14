@@ -2,6 +2,7 @@
 
 // Requires
 var async = require('async')
+var json2mongo = require('json2mongo')
 var MongoClient = require('mongodb').MongoClient
 var ObjectID = require('mongodb-core').BSON.ObjectID
 var path = require('path')
@@ -26,28 +27,56 @@ module.exports = function (opts) {
     var content = String(file.contents)
     var json
 
-    try {
-      json = JSON.parse(content)
-    } catch (e) {
+    if (!content) {
       return cb(
         new PluginError(
-          'gulp-mongodb-data', 'Problem parsing JSON file', {
+          'gulp-mongodb-data', 'File cannot be empty', {
             fileName: file.path,
             showStack: true
           }))
     }
 
-    // Only arrays of objects are supported
-    if (!Array.isArray(json)) {
+    if (content[0] === '[') {
+      // Assume file contains properly formatted JSON array
+      try {
+        json = JSON.parse(content)
+      } catch (e) {
+        return cb(
+          new PluginError(
+            'gulp-mongodb-data', 'Problem parsing JSON file', {
+              fileName: file.path,
+              showStack: true
+            }))
+      }
+    } else if (content[0] === '{') {
+      // Assume file contains mongoexport dump or single item
+      json = []
+      var dumpedObjects = content.split('\n')
+      for (var i = 0; i < dumpedObjects.length; i++) {
+        if (!dumpedObjects[i]) continue
+        try {
+          json.push(json2mongo(JSON.parse(dumpedObjects[i])))
+        } catch (e) {
+          return cb(
+            new PluginError(
+              'gulp-mongodb-data', 'Problem parsing JSON file', {
+                fileName: file.path,
+                showStack: true
+              }))
+        }
+      }
+    } else {
+      // We have no idea what the user sent us
       return cb(
-        new PluginError('gulp-mongodb-data', 'JSON is not an array', {
-          fileName: file.path,
-          showStack: true
-        }))
+        new PluginError(
+          'gulp-mongodb-data', 'File is not valid', {
+            fileName: file.path,
+            showStack: true
+          }))
     }
 
     json = json.map(function (obj) {
-      if (obj._id) {
+      if (obj._id && typeof obj._id === 'string') {
         obj._id = ObjectID(obj._id)
       }
       return obj
