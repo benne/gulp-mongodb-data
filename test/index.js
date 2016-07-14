@@ -24,7 +24,7 @@ describe('gulp-mongodb-data', function() {
   });
 
   afterEach(function(done) {
-    var testDbs = ['nope', 'mydb'];
+    var testDbs = ['nope', 'nopeV2'];
     var adminDb = dbRef.admin();
     adminDb.listDatabases(function(err, result) {
       async.each(result.databases, function(db, cb) {
