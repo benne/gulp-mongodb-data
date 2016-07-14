@@ -69,13 +69,14 @@ gulp.task('metadata', function() {
 ### JSON files
 
 Json files should be formatted as an array of valid JSON objects for the plugin
-to be able to process it.
+to be able to process it. You can even include a specific Object ID.
 
 ```js
 [{
   "a": 1
 },
 {
+  "_id": "578611d17c8a27dd5b329fd5",
   "a": 2
 },
 ...]
