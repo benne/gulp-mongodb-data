@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+**July 15, 2016**
+
+* **Add** Add support for importing mongoexport data dumps
+* **Change** Change code to conform with JS standards
+* **Change** Update dependencies to latest version
+
 ## 1.1.1
 **July 15, 2016**
 
