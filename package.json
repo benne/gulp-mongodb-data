@@ -1,6 +1,6 @@
 {
   "name": "gulp-mongodb-data",
-  "description": "Load JSON files into MongoDB with Gulp (gulpjs.com)",
+  "description": "Load JSON files and mongoexport dumps into MongoDB with Gulp (gulpjs.com)",
   "version": "1.1.1",
   "homepage": "https://github.com/benne/gulp-mongodb-data",
   "repository": {
@@ -32,15 +32,13 @@
     "lint": "gulp lint",
     "test": "mocha"
   },
-  "engines": {
-    "node": ">= 4.1.2"
-  },
   "keywords": [
     "gulp",
     "gulpplugin",
     "gulp-mongodb",
     "gulp-mongodb-data",
-    "mongodb"
+    "mongodb",
+    "mongoexport"
   ],
   "license": "MIT"
 }
