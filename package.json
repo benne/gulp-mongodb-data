@@ -1,7 +1,7 @@
 {
   "name": "gulp-mongodb-data",
   "description": "Load JSON files into MongoDB with Gulp (gulpjs.com)",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/benne/gulp-mongodb-data",
   "repository": {
     "type": "git",

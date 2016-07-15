@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+**July 15, 2016**
+
+* **Fix** Add missing dependency for node <5.x
+
 ## 1.1.0
 **July 14, 2016**
 
