@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+**August 22, 2016**
+
+* **Add** Add support for using MongoDB supported data types as _id
+
 ## 2.0.0
 **July 15, 2016**
 
