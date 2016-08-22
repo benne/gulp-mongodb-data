@@ -75,12 +75,14 @@ module.exports = function (opts) {
           }))
     }
 
-    json = json.map(function (obj) {
-      if (obj._id && typeof obj._id === 'string') {
-        obj._id = ObjectID(obj._id)
-      }
-      return obj
-    })
+    if (opts.idAsObjectID) {
+      json = json.map(function (obj) {
+        if (obj._id && typeof obj._id === 'string') {
+          obj._id = ObjectID(obj._id)
+        }
+        return obj
+      })
+    }
 
     MongoClient.connect(opts.mongoUrl, function (err, db) {
       if (err) {
@@ -127,6 +129,9 @@ module.exports = function (opts) {
 function setDefaultOptions (opts) {
   opts = opts || {}
   opts.mongoUrl = opts.mongoUrl || 'mongodb://localhost/nope'
+  opts.idAsObjectID =
+    typeof opts.idAsObjectID !== 'undefined' &&
+    opts.idAsObjectID !== null ? opts.idAsObjectID : true
 
   return opts
 }

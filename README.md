@@ -43,6 +43,18 @@ gulp.task('metadata', function() {
     .pipe(mongodbData({ mongoUrl: 'mongodb://localhost/mydb' }))
 })
 
+// Load JSON files, with arrays of objects, or data dumps from mongoexport,
+// into the specified MongoDB server, using file names as collection names,
+// and retain the _id data type (useful for when using strings or numbers as
+// _id)
+gulp.task('metadata', function() {
+  gulp.src('./db/metadata/*.json')
+    .pipe(mongodbData({
+      mongoUrl: 'mongodb://localhost/mydb',
+      idAsObjectID: false
+    }))
+})
+
 // Load JSON file, with array of objects, or data dumps from mongoexport,
 // into the specified MongoDB server, using the specified collection name
 gulp.task('metadata', function() {
@@ -78,6 +90,26 @@ to be able to process it. You can even include a specific Object ID.
 {
   "_id": "578611d17c8a27dd5b329fd5",
   "a": 2
+},
+...]
+```
+
+The ```_id``` field is usually converted to an ObjectID before inserting,
+if ```_id``` is a string. By setting the ```idAsObjectID``` option to false,
+you can use any supported data type as ```_id``` (except arrays).
+
+```js
+[{
+  "_id": "697d1942-47bc-4fc5-ac92-6e8b1dbb649f",
+  "a": 1
+},
+{
+  "_id": 13.37,
+  "a": 2
+},
+{
+  "_id": true,
+  "a": 3
 },
 ...]
 ```

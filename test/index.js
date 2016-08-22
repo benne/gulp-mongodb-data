@@ -246,6 +246,33 @@ describe('gulp-mongodb-data', function () {
     stream.write(fixture('test/fixtures/export-test.json'))
     stream.end()
   })
+
+  it('should use custom _id when idAsObjectID is false', function (done) {
+    var stream = mongodbData({
+      idAsObjectID: false
+    })
+
+    stream.on('data', function () {
+      var db = dbRef.db('nope')
+      var coll = db.collection('customid-test')
+
+      coll.find().toArray(function (err, objs) {
+        if (err) throw err
+        objs[0]._id.should.be.String
+        objs[0]._id.should.eql('697d1942-47bc-4fc5-ac92-6e8b1dbb649f')
+        objs[1]._id.should.be.Number
+        objs[1]._id.should.eql(1337)
+        objs[2]._id.should.be.Boolean
+        objs[2]._id.should.be.true
+        objs[3]._id.should.be.Number
+        objs[3]._id.should.eql(13.37)
+        done()
+      })
+    })
+
+    stream.write(fixture('test/fixtures/customid-test.json'))
+    stream.end()
+  })
 })
 
 function fixture (path) {

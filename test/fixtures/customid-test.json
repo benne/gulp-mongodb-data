@@ -1,0 +1,20 @@
+[{
+  "_id": "697d1942-47bc-4fc5-ac92-6e8b1dbb649f",
+  "firstName": "Tyler Guid",
+  "lastName": "Durden"
+},
+{
+  "_id": 1337,
+  "firstName": "Darth Integer",
+  "lastName": "Vader"
+},
+{
+  "_id": true,
+  "firstName": "Han Boolean",
+  "lastName": "Solo"
+},
+{
+  "_id": 13.37,
+  "firstName": "Ellen Double",
+  "lastName": "Ripley"
+}]
