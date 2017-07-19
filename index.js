@@ -39,7 +39,7 @@ module.exports = function (opts) {
     if (content[0] === '[') {
       // Assume file contains properly formatted JSON array
       try {
-        json = JSON.parse(content)
+        json = json2mongo(JSON.parse(content))
       } catch (e) {
         return cb(
           new PluginError(
