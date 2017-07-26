@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.1
+**July 26, 2016**
+
+* **Add** package-lock.json for NPM 5
+* **Fix** Fix mongoexports as arrays failing due to MongoDB keys (thanks to [kleber-swf](https://github.com/kleber-swf))
+* **Fix** Fix outdated dev-dependencies for causing npm install to fail
+
 ## 2.1.0
 **August 22, 2016**
 

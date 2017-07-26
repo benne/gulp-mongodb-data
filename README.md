@@ -14,7 +14,10 @@
 </tr>
 <tr>
 <td>Tested Node Versions</td>
-<td>6.3.0, 5.12.0, 4.4.7, 0.12.15, 0.10.46 (on Debian Linux)</td>
+<td>8.2.1, 7.10.1, 6.11.1, 5.12.0, 4.8.4, 0.12.18, 0.10.48 (on macOS)</td>
+</tr>
+<td>Tested against MongoDB</td>
+<td>3.4.6</td>
 </tr>
 <tr>
 <td>Gulp Version</td>
@@ -126,7 +129,7 @@ JSON files containing data dumps from mongoexport can also be used.
 
 (MIT License)
 
-Copyright (c) 2016 Benne <benne@chaosbyte.com>
+Copyright (c) 2017 Benne <benne@chaosbyte.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
