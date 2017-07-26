@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0
+**July 26, 2016**
+
+* **Change** Update all dependencies to latest version
+* **Change** Kill off support for legacy Node versions not supported anymore (0.10.x and 0.12.x)
+
 ## 2.1.1
 **July 26, 2016**
 

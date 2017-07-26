@@ -1,7 +1,7 @@
 {
   "name": "gulp-mongodb-data",
   "description": "Load JSON files and mongoexport dumps into MongoDB with Gulp (gulpjs.com)",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "homepage": "https://github.com/benne/gulp-mongodb-data",
   "repository": {
     "type": "git",

@@ -14,7 +14,7 @@
 </tr>
 <tr>
 <td>Tested Node Versions</td>
-<td>8.2.1, 7.10.1, 6.11.1, 5.12.0, 4.8.4, 0.12.18, 0.10.48 (on macOS)</td>
+<td>8.2.1, 7.10.1, 6.11.1, 5.12.0, 4.8.4 (on macOS)</td>
 </tr>
 <td>Tested against MongoDB</td>
 <td>3.4.6</td>
