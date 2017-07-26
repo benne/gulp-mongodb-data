@@ -10,23 +10,25 @@
   "author": "Benne <benne@chaosbyte.com> (http://benne.io/)",
   "main": "./index.js",
   "dependencies": {
-    "async": "^2.0.0",
-    "json2mongo": "^1.0.1",
-    "mongodb": "^2.0.46",
-    "mongodb-core": "^2.0.5",
+    "async": "^2.5.0",
+    "json2mongo": "^1.1.0",
+    "mongodb": "^2.2.30",
+    "mongodb-core": "^2.1.14",
     "plugin-error": "^0.1.2",
-    "through2": "^2.0.0"
+    "through2": "^2.0.3"
   },
   "devDependencies": {
-    "eslint": "^3.0.1",
-    "eslint-config-standard": "^6.0.0-beta.0",
-    "eslint-plugin-promise": "^3.3.0",
-    "eslint-plugin-standard": "^2.0.0",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "mocha": "^2.3.3",
-    "should": "^9.0.2",
-    "vinyl": "^1.1.0"
+    "gulp-eslint": "^4.0.0",
+    "mocha": "^3.4.2",
+    "should": "^11.2.1",
+    "vinyl": "^2.1.0"
   },
   "scripts": {
     "lint": "gulp lint",
