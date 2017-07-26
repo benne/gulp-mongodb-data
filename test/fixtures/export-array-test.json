@@ -1,0 +1,4 @@
+[
+  {"_id":"596a232dd7a9e34434c4df4c","name":"foo","category":{"$oid":"596a20587cc4ad065cd2cba1"}},
+  {"_id":"596a232dd7a9e34434c4df4d","name":"bar","category":{"$oid":"596a20587cc4ad065cd2cba1"}}
+]

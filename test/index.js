@@ -3,6 +3,7 @@
 var async = require('async')
 var fs = require('fs')
 var MongoClient = require('mongodb').MongoClient
+var ObjectID = require('mongodb').ObjectID
 var mongodbData = require('../')
 var File = require('vinyl')
 
@@ -258,19 +259,42 @@ describe('gulp-mongodb-data', function () {
 
       coll.find().toArray(function (err, objs) {
         if (err) throw err
-        objs[0]._id.should.be.String
+        objs[0]._id.should.be.String()
         objs[0]._id.should.eql('697d1942-47bc-4fc5-ac92-6e8b1dbb649f')
-        objs[1]._id.should.be.Number
+        objs[1]._id.should.be.Number()
         objs[1]._id.should.eql(1337)
-        objs[2]._id.should.be.Boolean
-        objs[2]._id.should.be.true
-        objs[3]._id.should.be.Number
+        objs[2]._id.should.be.Boolean()
+        objs[2]._id.should.be.true()
+        objs[3]._id.should.be.Number()
         objs[3]._id.should.eql(13.37)
         done()
       })
     })
 
     stream.write(fixture('test/fixtures/customid-test.json'))
+    stream.end()
+  })
+
+  it('should handle mongoexport files with array', function (done) {
+    var stream = mongodbData()
+
+    stream.on('data', function () {
+      var db = dbRef.db('nope')
+      var coll = db.collection('export-array-test')
+
+      coll.find().toArray(function (err, objs) {
+        if (err) throw err
+        objs.length.should.eql(2)
+        objs[0]._id.should.be.instanceOf(ObjectID)
+        objs[0]._id.should.eql(new ObjectID('596a232dd7a9e34434c4df4c'))
+        objs[0].name.should.eql('foo')
+        objs[0].category.should.be.instanceOf(ObjectID)
+        objs[0].category.should.eql(new ObjectID('596a20587cc4ad065cd2cba1'))
+        done()
+      })
+    })
+
+    stream.write(fixture('test/fixtures/export-array-test.json'))
     stream.end()
   })
 })
