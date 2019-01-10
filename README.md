@@ -14,14 +14,14 @@
 </tr>
 <tr>
 <td>Tested Node Versions</td>
-<td>8.2.1, 7.10.1, 6.11.1, 5.12.0, 4.8.4 (on macOS)</td>
+<td>11.6.0, 10.15.0, 8.15.0, 6.16.0 (on Ubuntu)</td>
 </tr>
 <td>Tested against MongoDB</td>
-<td>3.4.6</td>
+<td>4.0.5</td>
 </tr>
 <tr>
 <td>Gulp Version</td>
-<td>3.x</td>
+<td>4.x</td>
 </tr>
 </table>
 

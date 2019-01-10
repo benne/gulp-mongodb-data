@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+**January 10, 2019**
+
+* **Change** Update dependencies due to security vulnerabilities
+
 ## 3.0.0
 **July 26, 2016**
 
