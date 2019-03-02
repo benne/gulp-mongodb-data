@@ -129,7 +129,7 @@ JSON files containing data dumps from mongoexport can also be used.
 
 (MIT License)
 
-Copyright (c) 2017 Benne <benne@chaosbyte.com>
+Copyright (c) 2019 Benne <benne@chaosbyte.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
