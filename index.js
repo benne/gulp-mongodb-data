@@ -128,7 +128,7 @@ module.exports = function (opts) {
 
 function setDefaultOptions (opts) {
   opts = opts || {}
-  opts.mongoUrl = opts.mongoUrl || 'mongodb://localhost/nope'
+  opts.mongoUrl = opts.mongoUrl || `${process.env.GULP_MONGODB_DATA_DEFAULT_CONNECTIONSTRING}/nope` || 'mongodb://localhost/nope'
   opts.idAsObjectID =
     typeof opts.idAsObjectID !== 'undefined' &&
     opts.idAsObjectID !== null ? opts.idAsObjectID : true

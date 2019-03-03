@@ -11,10 +11,11 @@ require('mocha')
 require('should')
 
 var dbRef
+var connectionString = process.env.GULP_MONGODB_DATA_DEFAULT_CONNECTIONSTRING || 'mongodb://localhost'
 
 describe('gulp-mongodb-data', function () {
   before(function (done) {
-    MongoClient.connect('mongodb://localhost', function (err, db) {
+    MongoClient.connect(connectionString, function (err, db) {
       if (err) throw err
       dbRef = db
       done()
@@ -105,7 +106,7 @@ describe('gulp-mongodb-data', function () {
 
   it('should use specified MongoDB url', function (done) {
     var stream = mongodbData({
-      mongoUrl: 'mongodb://localhost/nopeV2'
+      mongoUrl: `${connectionString}/nopeV2`
     })
 
     stream.on('data', function () {
