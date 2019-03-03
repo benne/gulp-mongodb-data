@@ -1,6 +1,8 @@
 # gulp-mongodb-data
 
-> Load JSON files and mongoexport dumps into MongoDB with Gulp
+[![Build status](https://dev.azure.com/Benne/gulp-mongodb-data/_apis/build/status/gulp-mongodb-data%20CI)](https://dev.azure.com/Benne/gulp-mongodb-data/_build/latest?definitionId=3) [![npm](https://img.shields.io/npm/v/gulp-mongodb-data.svg)](https://www.npmjs.com/package/gulp-mongodb-data)
+
+Load JSON files and mongoexport dumps into MongoDB with Gulp
 
 ## Information
 
