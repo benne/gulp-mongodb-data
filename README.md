@@ -16,10 +16,10 @@ Load JSON files and mongoexport dumps into MongoDB with Gulp
 </tr>
 <tr>
 <td>Tested Node Versions</td>
-<td>11.6.0, 10.15.0, 8.15.0, 6.16.0 (on Ubuntu)</td>
+<td>10.22.1, 12.19.0, 14.14.0, 15.0.1 (on Ubuntu)</td>
 </tr>
 <td>Tested against MongoDB</td>
-<td>4.0.5</td>
+<td>3.6.8</td>
 </tr>
 <tr>
 <td>Gulp Version</td>
@@ -45,7 +45,10 @@ var mongodbData = require('gulp-mongodb-data')
 // into the specified MongoDB server, using file names as collection names
 gulp.task('metadata', function() {
   gulp.src('./db/metadata/*.json')
-    .pipe(mongodbData({ mongoUrl: 'mongodb://localhost/mydb' }))
+    .pipe(mongodbData({
+      mongoUri: 'mongodb://localhost',
+      databaseName: 'mydb'
+    }))
 })
 
 // Load JSON files, with arrays of objects, or data dumps from mongoexport,
@@ -55,7 +58,8 @@ gulp.task('metadata', function() {
 gulp.task('metadata', function() {
   gulp.src('./db/metadata/*.json')
     .pipe(mongodbData({
-      mongoUrl: 'mongodb://localhost/mydb',
+      mongoUri: 'mongodb://localhost',
+      databaseName: 'mydb',
       idAsObjectID: false
     }))
 })
@@ -65,7 +69,8 @@ gulp.task('metadata', function() {
 gulp.task('metadata', function() {
   gulp.src('./db/metadata/users-test.json')
     .pipe(mongodbData({
-      mongoUrl: 'mongodb://localhost/mydb',
+      mongoUri: 'mongodb://localhost',
+      databaseName: 'mydb',
       collectionName: 'users'
     }))
 })
@@ -76,7 +81,8 @@ gulp.task('metadata', function() {
 gulp.task('metadata', function() {
   gulp.src('./db/metadata/users-test.json')
     .pipe(mongodbData({
-      mongoUrl: 'mongodb://localhost/mydb',
+      mongoUri: 'mongodb://localhost',
+      databaseName: 'mydb',
       collectionName: 'users',
       dropCollection: true
     }))
@@ -131,7 +137,7 @@ JSON files containing data dumps from mongoexport can also be used.
 
 (MIT License)
 
-Copyright (c) 2019 Benne <benne@chaosbyte.com>
+Copyright (c) 2020 Benne <benne@chaosbyte.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0
+**October 26, 2020**
+
+* **Change** Update dependencies due to security vulnerabilities
+
 ## 3.0.1
 **January 10, 2019**
 
