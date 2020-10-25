@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/benne/gulp-mongodb-data.git"
   },
-  "author": "Benne <benne@chaosbyte.com> (http://benne.io/)",
+  "author": "Benne <benne@chaosbyte.com> (https://benne.io/)",
   "main": "./index.js",
   "dependencies": {
     "async": "^3.2.0",
