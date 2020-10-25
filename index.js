@@ -84,11 +84,13 @@ module.exports = function (opts) {
       })
     }
 
-    MongoClient.connect(opts.mongoUrl, function (err, db) {
+    MongoClient.connect(opts.mongoUri, function (err, client) {
       if (err) {
         return cb(
           new PluginError('gulp-mongodb-data', err, {showStack: true}))
       }
+
+      var db = client.db(opts.databaseName)
 
       var collectionName = opts.collectionName ||
         path.basename(file.path, path.extname(file.path))
@@ -112,7 +114,7 @@ module.exports = function (opts) {
           coll.insertMany(json, cb)
         }
       ], function (err) {
-        db.close()
+        client.close()
 
         if (err) {
           return cb(
@@ -128,7 +130,8 @@ module.exports = function (opts) {
 
 function setDefaultOptions (opts) {
   opts = opts || {}
-  opts.mongoUrl = opts.mongoUrl || ((process.env.GULP_MONGODB_DATA_DEFAULT_CONNECTIONSTRING || 'mongodb://localhost') + '/nope')
+  opts.mongoUri = opts.mongoUri || process.env.GULP_MONGODB_DATA_DEFAULT_CONNECTIONSTRING || 'mongodb://localhost'
+  opts.databaseName = opts.databaseName || 'nope'
   opts.idAsObjectID =
     typeof opts.idAsObjectID !== 'undefined' &&
     opts.idAsObjectID !== null ? opts.idAsObjectID : true
