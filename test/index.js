@@ -10,29 +10,30 @@ var File = require('vinyl')
 require('mocha')
 require('should')
 
-var dbRef
+var clientRef
 var connectionString = process.env.GULP_MONGODB_DATA_DEFAULT_CONNECTIONSTRING || 'mongodb://localhost'
 
 describe('gulp-mongodb-data', function () {
   before(function (done) {
-    MongoClient.connect(connectionString, function (err, db) {
+    MongoClient.connect(connectionString, function (err, client) {
       if (err) throw err
-      dbRef = db
+      clientRef = client
       done()
     })
   })
 
   after(function () {
-    dbRef.close()
+    clientRef.close()
   })
 
   afterEach(function (done) {
     var testDbs = ['nope', 'nopeV2']
-    var adminDb = dbRef.admin()
+
+    var adminDb = clientRef.db('admin').admin()
     adminDb.listDatabases(function (err, result) {
       if (err) throw err
       async.each(result.databases, function (db, cb) {
-        if (testDbs.indexOf(db.name) >= 0) dbRef.db(db.name).dropDatabase(cb)
+        if (testDbs.indexOf(db.name) >= 0) clientRef.db(db.name).dropDatabase(cb)
         else cb()
       }, done)
     })
@@ -42,7 +43,7 @@ describe('gulp-mongodb-data', function () {
     var stream = mongodbData()
 
     stream.on('data', function () {
-      var adminDb = dbRef.admin()
+      var adminDb = clientRef.db('admin').admin()
       adminDb.listDatabases(function (err, result) {
         if (err) throw err
         async.some(result.databases, function (db, cb) {
@@ -63,7 +64,7 @@ describe('gulp-mongodb-data', function () {
     var stream = mongodbData()
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       db.listCollections().toArray(function (err, collections) {
         if (err) throw err
         async.some(collections, function (coll, cb) {
@@ -81,18 +82,18 @@ describe('gulp-mongodb-data', function () {
   })
 
   it('should not drop collection by default', function (done) {
-    var db = dbRef.db('nope')
+    var db = clientRef.db('nope')
     var coll = db.collection('users-test')
     var existingUser = {
       firstName: 'David',
       lastName: 'Guetta'
     }
 
-    coll.insert(existingUser, function () {
+    coll.insertOne(existingUser, function () {
       var stream = mongodbData()
 
       stream.on('data', function () {
-        coll.count(function (err, count) {
+        coll.countDocuments(function (err, count) {
           if (err) throw err
           count.should.eql(6)
           done()
@@ -106,11 +107,12 @@ describe('gulp-mongodb-data', function () {
 
   it('should use specified MongoDB url', function (done) {
     var stream = mongodbData({
-      mongoUrl: `${connectionString}/nopeV2`
+      mongoUri: connectionString,
+      databaseName: 'nopeV2'
     })
 
     stream.on('data', function () {
-      var adminDb = dbRef.admin()
+      var adminDb = clientRef.db('admin').admin()
       adminDb.listDatabases(function (err, result) {
         if (err) throw err
         async.some(result.databases, function (db, cb) {
@@ -133,7 +135,7 @@ describe('gulp-mongodb-data', function () {
     })
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       db.listCollections().toArray(function (err, collections) {
         if (err) throw err
         async.some(collections, function (coll, cb) {
@@ -151,20 +153,20 @@ describe('gulp-mongodb-data', function () {
   })
 
   it('should drop collection when specified', function (done) {
-    var db = dbRef.db('nope')
+    var db = clientRef.db('nope')
     var coll = db.collection('users-test')
     var existingUser = {
       firstName: 'David',
       lastName: 'Guetta'
     }
 
-    coll.insert(existingUser, function () {
+    coll.insertOne(existingUser, function () {
       var stream = mongodbData({
         dropCollection: true
       })
 
       stream.on('data', function () {
-        coll.count(function (err, count) {
+        coll.countDocuments(function (err, count) {
           if (err) throw err
           count.should.eql(5)
           done()
@@ -184,7 +186,7 @@ describe('gulp-mongodb-data', function () {
       counter++
       if (counter < 2) return
 
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       db.listCollections().toArray(function (err, collections) {
         if (err) throw err
         async.filter(collections, function (coll, cb) {
@@ -206,7 +208,7 @@ describe('gulp-mongodb-data', function () {
     var stream = mongodbData()
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       var coll = db.collection('users-test')
 
       coll.find().toArray(function (err, users) {
@@ -228,7 +230,7 @@ describe('gulp-mongodb-data', function () {
     var stream = mongodbData()
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       var coll = db.collection('export-test')
 
       coll.find().toArray(function (err, objs) {
@@ -255,7 +257,7 @@ describe('gulp-mongodb-data', function () {
     })
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       var coll = db.collection('customid-test')
 
       coll.find().toArray(function (err, objs) {
@@ -280,7 +282,7 @@ describe('gulp-mongodb-data', function () {
     var stream = mongodbData()
 
     stream.on('data', function () {
-      var db = dbRef.db('nope')
+      var db = clientRef.db('nope')
       var coll = db.collection('export-array-test')
 
       coll.find().toArray(function (err, objs) {
