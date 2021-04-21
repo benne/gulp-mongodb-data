@@ -4,6 +4,10 @@
 
 Load JSON files and mongoexport dumps into MongoDB with Gulp
 
+## **Important!** Repository archived 2021-04-21
+
+I have decided to archive this project due lack of available time for maintenance. If you feel that you have what it takes to be the maintainer of this repo and NPM package, feel free to reach out to me. 😉
+
 ## Information
 
 <table>
